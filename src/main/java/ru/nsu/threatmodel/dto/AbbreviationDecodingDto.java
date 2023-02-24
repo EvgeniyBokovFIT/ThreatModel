@@ -1,4 +1,4 @@
-package ru.nsu.threatmodel;
+package ru.nsu.threatmodel.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

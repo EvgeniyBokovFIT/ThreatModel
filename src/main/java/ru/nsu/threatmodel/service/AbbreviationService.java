@@ -2,7 +2,7 @@ package ru.nsu.threatmodel.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nsu.threatmodel.AbbreviationDecodingDto;
+import ru.nsu.threatmodel.dto.AbbreviationDecodingDto;
 import ru.nsu.threatmodel.repository.AbbreviationRepository;
 
 import java.util.List;

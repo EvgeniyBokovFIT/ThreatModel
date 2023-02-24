@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users
 (
-    "id"               	INTEGER 		   PRIMARY KEY NOT NULL,
+    "id"               	SERIAL 		   PRIMARY KEY,
     "login"             VARCHAR(64)        UNIQUE NOT NULL,
     "salt"          	VARCHAR(50)        NOT NULL,
     "password"          VARCHAR(100)       NOT NULL,
