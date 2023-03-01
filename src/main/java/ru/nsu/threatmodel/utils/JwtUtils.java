@@ -1,11 +1,11 @@
 package ru.nsu.threatmodel.utils;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import ru.nsu.threatmodel.entity.User;
-import com.auth0.jwt.JWT;
 import ru.nsu.threatmodel.exception.AuthException;
 
 import java.util.Date;
@@ -48,7 +48,7 @@ public class JwtUtils {
         }
     }
 
-    public Long getUserIdByAccessToken(String accessToken) {
+    public static Long getUserIdByAccessToken(String accessToken) {
         var decodedAccessTokenJwt = parseToken(accessToken);
         return Long.parseLong(decodedAccessTokenJwt.getSubject());
     }
