@@ -13,7 +13,7 @@ public class UserMapper implements Function<User, UserDto> {
         return new UserDto(
                 user.getId(),
                 user.getLogin(),
-                user.getCreatedAt()
+                user.getCreatedAt().toString()
         );
     }
 }

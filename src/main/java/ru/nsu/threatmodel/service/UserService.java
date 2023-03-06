@@ -40,7 +40,8 @@ public class UserService {
     private void checkLoginDoesNotExists(String login) {
         userRepository.getByLogin(login)
                 .ifPresent(user ->
-                        {throw new RegistrationException(
+                        {
+                            throw new RegistrationException(
                                 "Пользователь с таким логином уже существует"); }
                 );
     }

@@ -23,12 +23,14 @@ public class AuthService {
 
     private final UserMapper userMapper;
 
-    public LoginResponse login(LoginRequest loginRequest) {
+    public LoginResponse login(HttpServletResponse response, LoginRequest loginRequest) {
 
         var user = checkUser(loginRequest);
 
         var jwtPair = JwtUtils.generateTokenPair(user);
         user.setRefreshToken(jwtPair.refreshToken());
+
+        CookieUtils.addAuthCookies(response, jwtPair.accessToken(), jwtPair.refreshToken());
 
         return new LoginResponse(jwtPair, userMapper.apply(user));
     }
