@@ -8,7 +8,7 @@ INSERT INTO information_types("id", "type")
 VALUES (1, 'Персональные данные');
 
 INSERT INTO operations_on_data("id", "name")
-VALUES (1, 'Сбор');
+VALUES (1, 'Сбор'), (2, 'Обработка');
 
 INSERT INTO information_type_operation("information_type_id", "operation_id")
-VALUES (1, 1);
+VALUES (1, 1), (1, 2);

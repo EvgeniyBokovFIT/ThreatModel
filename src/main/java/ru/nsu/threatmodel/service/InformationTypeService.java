@@ -2,28 +2,28 @@ package ru.nsu.threatmodel.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nsu.threatmodel.dto.OperationOnDataDto;
+import ru.nsu.threatmodel.dto.OperationsOnDataDto;
 import ru.nsu.threatmodel.repository.InformationTypeRepository;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class InformationTypeService {
     private final InformationTypeRepository informationTypeRepository;
 
-    public Set<OperationOnDataDto> findOperationsByInformationType(String type) {
+    public OperationsOnDataDto findOperationsByInformationType(String type) {
         var optionalInformationType = informationTypeRepository.findByType(type);
         if(optionalInformationType.isEmpty()) {
-            return Collections.emptySet();
+            return new OperationsOnDataDto(null);
         }
 
         var informationType = optionalInformationType.get();
-        return informationType.getOperations()
-                .stream()
-                .map(op -> new OperationOnDataDto(op.getName()))
-                .collect(Collectors.toSet());
+        Set<String> operations = new HashSet<>();
+        informationType.getOperations()
+                .forEach(op -> operations.add(op.getName()));
+
+        return new OperationsOnDataDto(operations);
     }
 }
