@@ -22,7 +22,6 @@ public class DefinitionController {
 
     @GetMapping
     public ResponseEntity<List<DefinitionDto>> getDefinitionMeaningStartsWith(@RequestParam String definition) {
-        log.info("Запрос на поиск определения: " + definition);
         return ResponseEntity.ok(definitionService.getMeaning(definition));
     }
 }
