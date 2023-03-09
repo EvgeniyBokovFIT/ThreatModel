@@ -43,3 +43,40 @@ CREATE TABLE IF NOT EXISTS information_type_operation
     CONSTRAINT fk_inf_type FOREIGN KEY ("information_type_id") REFERENCES information_types (id),
     CONSTRAINT fk_operation FOREIGN KEY ("operation_id") REFERENCES operations_on_data (id)
 );
+
+CREATE TABLE IF NOT EXISTS roles
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "name"        VARCHAR(256)      NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS permissions
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "name"        VARCHAR(512)      NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS role_permission
+(
+    "role_id"           INTEGER     NOT NULL,
+    "permission_id"     INTEGER     NOT NULL,
+
+    PRIMARY KEY ("role_id", "permission_id"),
+    CONSTRAINT fk_role FOREIGN KEY ("role_id") REFERENCES roles (id),
+    CONSTRAINT fk_permission FOREIGN KEY ("permission_id") REFERENCES permissions (id)
+);
+
+CREATE TABLE IF NOT EXISTS objects_of_influence
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "name"        VARCHAR(256)      NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS components_of_objects
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "object_id"   INTEGER           NOT NULL,
+    "name"        VARCHAR(512)      NOT NULL,
+
+    CONSTRAINT fk_object_component FOREIGN KEY ("object_id") REFERENCES objects_of_influence (id)
+);
