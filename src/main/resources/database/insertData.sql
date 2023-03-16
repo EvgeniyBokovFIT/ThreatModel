@@ -22,3 +22,9 @@ VALUES (1, 'модернизация, настройка и мониторинг
 
 INSERT INTO role_permission("role_id", "permission_id")
 VALUES (1, 1), (1, 2);
+
+INSERT INTO objects_of_influence("id", "name")
+VALUES (1, 'Информация, содержащаяся в ИС'), (2, 'АРМ пользователей');
+
+INSERT INTO components_of_objects("id", "object_id", "name")
+VALUES (1, 1, 'Базы данных'), (2, 1, 'Защищаемые данные'), (3, 1, 'Объекты файловой системы');
