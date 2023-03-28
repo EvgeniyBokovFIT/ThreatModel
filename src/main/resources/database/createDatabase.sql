@@ -80,3 +80,33 @@ CREATE TABLE IF NOT EXISTS components_of_objects
 
     CONSTRAINT fk_object_component FOREIGN KEY ("object_id") REFERENCES objects_of_influence (id)
 );
+
+--Таблицы для хранения информации пользователей
+CREATE TABLE IF NOT EXISTS threat_models
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "name"        VARCHAR(256)      NOT NULL,
+    "user_id"     INTEGER           NOT NULL,
+
+    CONSTRAINT fk_model_user FOREIGN KEY ("user_id") REFERENCES users (id)
+);
+
+CREATE TABLE IF NOT EXISTS info_abbreviations
+(
+    "id"            SERIAL            PRIMARY KEY,
+    "abbreviation"  VARCHAR(256)      NOT NULL,
+    "decoding"      VARCHAR(512)      UNIQUE NOT NULL,
+    "model_id"      INTEGER           NOT NULL,
+
+    CONSTRAINT fk_abbreviation_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);
+
+CREATE TABLE IF NOT EXISTS info_definitions
+(
+    "id"          SERIAL            PRIMARY KEY,
+    "definition"  VARCHAR(256)      NOT NULL,
+    "meaning"     VARCHAR(512)      UNIQUE NOT NULL,
+    "model_id"    INTEGER           NOT NULL,
+
+    CONSTRAINT fk_definition_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);
