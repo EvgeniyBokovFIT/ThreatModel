@@ -21,5 +21,6 @@ public class AbbreviationModified {
     private String abbreviation;
     private String decoding;
     @ManyToOne
+    @JoinColumn(name = "model_id")
     private ThreatModel threatModel;
 }

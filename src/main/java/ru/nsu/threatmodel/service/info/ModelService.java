@@ -2,6 +2,7 @@ package ru.nsu.threatmodel.service.info;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nsu.threatmodel.dto.ModelResponse;
 import ru.nsu.threatmodel.entity.User;
 import ru.nsu.threatmodel.entity.info.ThreatModel;
 import ru.nsu.threatmodel.exception.UserException;
@@ -15,7 +16,7 @@ public class ModelService {
     private final ThreatModelRepository modelRepository;
     private final UserRepository userRepository;
 
-    public void createNewModel(String accessToken, String modelName) {
+    public ModelResponse createNewModel(String accessToken, String modelName) {
         Long userId = JwtUtils.getUserIdByAccessToken(accessToken);
         User user = userRepository.findById(userId).orElseThrow(() ->
                 new UserException("Пользователь не найден. ID:" + userId));
@@ -23,6 +24,7 @@ public class ModelService {
         ThreatModel model = new ThreatModel();
         model.setName(modelName);
         model.setUser(user);
-        modelRepository.save(model);
+        ThreatModel savedModel = modelRepository.save(model);
+        return new ModelResponse(savedModel.getId(), savedModel.getName());
     }
 }

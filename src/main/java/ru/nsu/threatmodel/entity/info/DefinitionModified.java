@@ -21,5 +21,6 @@ public class DefinitionModified {
     private String definition;
     private String meaning;
     @ManyToOne
+    @JoinColumn(name = "model_id")
     private ThreatModel threatModel;
 }
