@@ -110,3 +110,49 @@ CREATE TABLE IF NOT EXISTS info_definitions
 
     CONSTRAINT fk_definition_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
 );
+
+--основные положения
+CREATE TABLE IF NOT EXISTS info_general_provisions
+(
+    "id"                            SERIAL            PRIMARY KEY,
+    "purpose"                       VARCHAR(1024)     NOT NULL, --назначение документа
+    "information_owner"             VARCHAR(1024)     NOT NULL, --владелец информации
+    "responsible_officials"         VARCHAR(1024)     NOT NULL, --ответственные лица
+    "model_developer_organisation"  VARCHAR(1024)     NOT NULL, --организация разработавшая модель угроз
+    "model_id"                      INTEGER           NOT NULL,
+
+    CONSTRAINT fk_provision_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);
+
+--НПА
+CREATE TABLE IF NOT EXISTS info_regulations
+(
+    "id"             SERIAL            PRIMARY KEY,
+    "regulation"     VARCHAR(1024)     NOT NULL,
+    "model_id"       INTEGER           NOT NULL,
+
+    CONSTRAINT fk_regulation_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);
+
+--Перечень информации, обрабатываемой в ИС
+CREATE TABLE IF NOT EXISTS info_system_information
+(
+    "id"                        SERIAL              PRIMARY KEY,
+    "information_type"          VARCHAR(128)        NOT NULL,
+    "operations"                VARCHAR(1024)       NOT NULL,
+    "composition"               VARCHAR(256)        NOT NULL,--состав сведений
+    "model_id"                  INTEGER             NOT NULL,
+
+    CONSTRAINT fk_system_information_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);
+
+--2.	ОПИСАНИЕ СИСТЕМ И СЕТЕЙ И ИХ ХАРАКТЕРИСТИКА КАК ОБЪЕКТОВ ЗАЩИТЫ
+CREATE TABLE IF NOT EXISTS info_system_description
+(
+    "id"                        SERIAL              PRIMARY KEY,
+    "general_information"       VARCHAR(1024)       NOT NULL, --общие сведения о системе
+    "system_name"               VARCHAR(128)        NOT NULL, --навзвание ИС
+    "model_id"                  INTEGER             NOT NULL,
+
+    CONSTRAINT fk_description_model FOREIGN KEY ("model_id") REFERENCES threat_models (id)
+);

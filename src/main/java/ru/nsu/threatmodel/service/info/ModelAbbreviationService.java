@@ -3,19 +3,19 @@ package ru.nsu.threatmodel.service.info;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nsu.threatmodel.dto.AbbreviationDto;
-import ru.nsu.threatmodel.entity.info.AbbreviationModified;
+import ru.nsu.threatmodel.entity.info.ModelAbbreviation;
 import ru.nsu.threatmodel.entity.info.ThreatModel;
 import ru.nsu.threatmodel.exception.ModelException;
-import ru.nsu.threatmodel.repository.info.ModifiedAbbreviationRepository;
+import ru.nsu.threatmodel.repository.info.ModelAbbreviationRepository;
 import ru.nsu.threatmodel.repository.info.ThreatModelRepository;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ModifiedAbbreviationService {
+public class ModelAbbreviationService {
 
-    private final ModifiedAbbreviationRepository abbreviationRepository;
+    private final ModelAbbreviationRepository abbreviationRepository;
     private final ThreatModelRepository modelRepository;
 
     public void addAbbreviationsToModel(List<AbbreviationDto> abbreviationsDto, Long modelId) {
@@ -24,7 +24,7 @@ public class ModifiedAbbreviationService {
 
         abbreviationsDto
                 .forEach(abbreviationDto -> {
-                    AbbreviationModified abbreviation = new AbbreviationModified();
+                    ModelAbbreviation abbreviation = new ModelAbbreviation();
                     abbreviation.setAbbreviation(abbreviationDto.abbreviation());
                     abbreviation.setDecoding(abbreviationDto.decoding());
                     abbreviation.setThreatModel(model);
